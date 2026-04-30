@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bwj3iwqn2pq2r"]
+
+[ext_resource type="Script" uid="uid://dhvbesm7u06fl" path="res://scripts/sleep.gd" id="1_16o1l"]
+[ext_resource type="FontFile" uid="uid://doqrpobj6uh73" path="res://fonts/PixelOperator8.ttf" id="1_es3c8"]
+[ext_resource type="FontFile" uid="uid://brd06x7ri4pld" path="res://fonts/PixelOperator8-Bold.ttf" id="2_16o1l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wom1g"]
+size = Vector2(68, 63.75)
+
+[node name="sleep" type="Area2D" unique_id=1131965852]
+collision_mask = 2
+script = ExtResource("1_16o1l")
+
+[node name="sleep_shape" type="CollisionShape2D" parent="." unique_id=637285512]
+position = Vector2(0, 0.875)
+shape = SubResource("RectangleShape2D_wom1g")
+
+[node name="Label" type="Label" parent="." unique_id=1175909359]
+offset_left = -31.0
+offset_top = -56.0
+offset_right = 69.0
+offset_bottom = -33.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_es3c8")
+text = "to sleep"
+
+[node name="E" type="Label" parent="Label" unique_id=1680075799]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.098
+anchor_top = -2.3260002
+anchor_right = -1.098
+anchor_bottom = -2.3260002
+offset_left = 87.8
+offset_top = 53.498005
+offset_right = 127.8
+offset_bottom = 76.498
+theme_override_colors/font_color = Color(0.14509805, 0.1764706, 0.63529414, 1)
+theme_override_fonts/font = ExtResource("2_16o1l")
+text = "E"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

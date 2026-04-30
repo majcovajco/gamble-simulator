@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://imq14x5y2iu2"]
+
+[ext_resource type="FontFile" uid="uid://doqrpobj6uh73" path="res://fonts/PixelOperator8.ttf" id="2_p05b1"]
+[ext_resource type="FontFile" uid="uid://brd06x7ri4pld" path="res://fonts/PixelOperator8-Bold.ttf" id="3_5kl4w"]
+[ext_resource type="Script" uid="uid://ckrksxqujbuhl" path="res://scripts/work.gd" id="3_p05b1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rabhu"]
+size = Vector2(75, 32)
+
+[node name="work" type="Area2D" unique_id=348921404]
+collision_mask = 2
+script = ExtResource("3_p05b1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1840502559]
+position = Vector2(-29, -13)
+shape = SubResource("RectangleShape2D_rabhu")
+
+[node name="work_label" type="Label" parent="." unique_id=1267152234]
+offset_left = -46.0
+offset_top = -49.0
+offset_right = 48.0
+offset_bottom = -26.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_p05b1")
+text = "to work"
+
+[node name="E" type="Label" parent="work_label" unique_id=959743031]
+layout_mode = 0
+offset_left = -19.0
+offset_top = 1.0
+offset_right = 5.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.7764706, 0.44705883, 1, 1)
+theme_override_fonts/font = ExtResource("3_5kl4w")
+text = "E"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="ready" from="." to="." method="_on_ready"]

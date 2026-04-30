@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://rjucp3udlaoi"]
+
+[ext_resource type="Script" uid="uid://dkkjc1wbfqsu7" path="res://scripts/automar_area_2d.gd" id="1_6d40c"]
+[ext_resource type="FontFile" uid="uid://brd06x7ri4pld" path="res://fonts/PixelOperator8-Bold.ttf" id="1_y2npm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pulwq"]
+size = Vector2(50, 26)
+
+[node name="Automat" type="Node2D" unique_id=1021822214]
+
+[node name="AutomarArea2D" type="Area2D" parent="." unique_id=1368659644]
+visibility_layer = 2
+collision_mask = 2
+script = ExtResource("1_6d40c")
+
+[node name="Automat_tvar" type="CollisionShape2D" parent="AutomarArea2D" unique_id=921848564]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_pulwq")
+
+[node name="E" type="Label" parent="AutomarArea2D/Automat_tvar" unique_id=308098997]
+offset_left = -8.0
+offset_top = -36.0
+offset_right = 15.0
+offset_bottom = -13.0
+theme_override_colors/font_color = Color(0.9882353, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_y2npm")
+theme_override_font_sizes/font_size = 16
+text = "E"
+
+[connection signal="body_entered" from="AutomarArea2D" to="AutomarArea2D" method="_on_body_entered"]
+[connection signal="body_exited" from="AutomarArea2D" to="AutomarArea2D" method="_on_body_exited"]

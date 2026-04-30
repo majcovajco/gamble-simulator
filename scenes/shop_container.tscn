@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bw0wft40qj4jc"]
+
+[ext_resource type="Texture2D" uid="uid://by3qj1m3jveci" path="res://assets/money_pile.png" id="1_5bp4b"]
+[ext_resource type="FontFile" uid="uid://brd06x7ri4pld" path="res://fonts/PixelOperator8-Bold.ttf" id="1_08fac"]
+[ext_resource type="FontFile" uid="uid://doqrpobj6uh73" path="res://fonts/PixelOperator8.ttf" id="1_whwf0"]
+[ext_resource type="Texture2D" uid="uid://oep18wjbth77" path="res://assets/buy_icon.png" id="2_08fac"]
+[ext_resource type="Texture2D" uid="uid://cb1o0ipt4g5x7" path="res://assets/sell_icon.png" id="3_whwf0"]
+
+[node name="shop_container" type="PanelContainer" unique_id=1940445592]
+custom_minimum_size = Vector2(1000, 100)
+offset_right = 1151.0
+offset_bottom = 208.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1675084079]
+layout_mode = 2
+
+[node name="item_icon" type="TextureRect" parent="HBoxContainer" unique_id=484878982]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="item_description" type="Label" parent="HBoxContainer" unique_id=380567357]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_whwf0")
+theme_override_font_sizes/font_size = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1048064315]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=273835729]
+layout_mode = 2
+
+[node name="item_price" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1980993513]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_08fac")
+theme_override_font_sizes/normal_font_size = 32
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="money_pile_icon" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=964156268]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("1_5bp4b")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=165033647]
+layout_mode = 2
+
+[node name="buy" type="TextureButton" parent="HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=981165155]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("2_08fac")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="sell" type="TextureButton" parent="HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=525167273]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("3_whwf0")
+ignore_texture_size = true
+stretch_mode = 5

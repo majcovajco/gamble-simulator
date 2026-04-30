@@ -1,0 +1,12 @@
+# Godot 4+ specific ignores
+.godot/
+!*/.godot/extension_list.cfg
+
+# Exported games folders
+export/
+builds/
+export_presets.cfg
+
+# System/OS files
+.DS_Store
+Thumbs.db
