@@ -14,10 +14,6 @@ func apply_speed_boost(new_speed: int, new_jump:int, duration: float):
 	JUMP_VELOCITY = -200.0
 
 func _physics_process(delta: float) -> void:
-	#keď je otvorené pc nehýbe sa
-	if UI.monitor_open:
-		return
-	
 	if UI.in_animation:
 		return
 	

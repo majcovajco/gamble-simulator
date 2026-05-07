@@ -8,14 +8,16 @@ extends CanvasLayer
 @onready var monitor = $AutomatUI
 @onready var casino_hra = $AutomatUI/monitor_png/casino_background
 @onready var shop_background = $AutomatUI/monitor_png/shop_background
+@onready var job_select_picture = $job_select_picture
 
 var last_money = 0
 var in_animation = false
 
 func _ready():
-	money_label.text = str(game_manager.money)
+	money_label.text = str(Global.money)
 	bet_label.text = str(monitor.win_multiplayer)
-	day.text = "Day: " + str(game_manager.day)
+	day.text = "Day: " + str(Global.day)
+	job_select_picture.visible = false
 	print(monitor.spin())
 	
 func fade():
@@ -42,7 +44,7 @@ func update_bet():
 	bet_label.text = str(current_bet)
 
 func update_money():
-	var current_money = snapped(game_manager.money, 0.01)
+	var current_money = snapped(Global.money, 0.01)
 	money_label.text = str(current_money)
 
 	if current_money > last_money:
@@ -54,13 +56,29 @@ func update_money():
 	last_money = current_money
 	
 func update_day():
-	day.text = "Day: " + str(game_manager.day)
+	day.text = "Day: " + str(Global.day)
 	
 var monitor_open = false
 
 func open_monitor():
 	monitor_open = !monitor_open
 	monitor.visible = monitor_open
+
+func close_monitor():
+	monitor_open = false
+	monitor.visible = false
+
+func open_job_menu():
+	job_select_picture.visible = true
+
+func close_job_menu():
+	job_select_picture.visible = false
+
+func toggle_job_menu():
+	job_select_picture.visible = !job_select_picture.visible
+
+func start_grass_cutter():
+	get_tree().change_scene_to_file("res://scenes/grass_cutter.tscn")
 
 
 func _on_shop_btn_pressed() -> void:

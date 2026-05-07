@@ -182,7 +182,7 @@ func update_cat_food_visuals() -> void:
 #------TOALETAK---------
 func _toaletak_buy_pressed() -> void:
 	if toaletaky_owned < 1000:# and game_manager.money >= toaletak_current_price:
-		game_manager.money -= toaletak_current_price
+		Global.money -= toaletak_current_price
 		toaletaky_owned += 1
 		toaletak_amount.text = str(toaletaky_owned)
 		update_toaletak_visuals() # Voláme našu funkciu na aktualizáciu obrázkov
@@ -192,7 +192,7 @@ func _toaletak_sell_pressed() -> void:
 	if toaletaky_owned > 0:
 		# vždy predáš jemne pod cenu trhu (napr. 90% neskôr upravím)
 		var sell_price = int(toaletak_current_price * 0.95)
-		game_manager.money += sell_price
+		Global.money += sell_price
 		toaletaky_owned -= 1
 		toaletak_amount.text = str(toaletaky_owned)
 		update_toaletak_visuals()
@@ -201,7 +201,7 @@ func _toaletak_sell_pressed() -> void:
 #------LUCK---------
 func _luck_buy_pressed() -> void:
 	if luck_owned < luck_price_arr.size():
-		game_manager.money -= luck_price_arr[luck_owned]
+		Global.money -= luck_price_arr[luck_owned]
 		luck_owned += 1
 		UI.update_money()
 		#Aktualizuje Luck_Progress_Bar!!!
@@ -214,7 +214,7 @@ func _luck_buy_pressed() -> void:
 #------WHISKY---------
 func _whisky_buy_pressed() -> void:
 	if whisky_owned < 1000:# and game_manager.money >= whisky_current_price:
-		game_manager.money -= whisky_current_price
+		Global.money -= whisky_current_price
 		whisky_owned += 1
 		whisky_amount.text = str(whisky_owned)
 		update_whisky_visuals()
@@ -223,7 +223,7 @@ func _whisky_buy_pressed() -> void:
 func _whisky_sell_pressed() -> void:
 	if whisky_owned > 0:
 		var sell_price = int(whisky_current_price * 0.95)
-		game_manager.money += sell_price
+		Global.money += sell_price
 		whisky_owned -= 1
 		whisky_amount.text = str(whisky_owned)
 		update_whisky_visuals()
@@ -232,7 +232,7 @@ func _whisky_sell_pressed() -> void:
 #------DOG FOOD---------
 func dog_food_buy_pressed() -> void:
 	if dog_food_owned < 1000:# and game_manager.money >= dog_food_current_price:
-		game_manager.money -= dog_food_current_price
+		Global.money -= dog_food_current_price
 		dog_food_owned += 1
 		dog_food_amount.text = str(dog_food_owned)
 		update_dog_food_visuals()
@@ -241,7 +241,7 @@ func dog_food_buy_pressed() -> void:
 func _dog_food_sell_pressed() -> void:
 	if dog_food_owned > 0:
 		var sell_price = int(dog_food_current_price * 0.95)
-		game_manager.money += sell_price
+		Global.money += sell_price
 		dog_food_owned -= 1
 		dog_food_amount.text = str(dog_food_owned)
 		update_dog_food_visuals()
@@ -250,7 +250,7 @@ func _dog_food_sell_pressed() -> void:
 #------CAT FOOD---------
 func _cat_food_buy_pressed() -> void:
 	if cat_food_owned < 1000:# and game_manager.money >= cat_food_current_price:
-		game_manager.money -= cat_food_current_price
+		Global.money -= cat_food_current_price
 		cat_food_owned += 1
 		cat_food_amount.text = str(cat_food_owned)
 		update_cat_food_visuals()
@@ -259,7 +259,7 @@ func _cat_food_buy_pressed() -> void:
 func _cat_food_sell_pressed() -> void:
 	if cat_food_owned > 0:
 		var sell_price = int(cat_food_current_price * 0.95)
-		game_manager.money += sell_price
+		Global.money += sell_price
 		cat_food_owned -= 1
 		cat_food_amount.text = str(cat_food_owned)
 		update_cat_food_visuals()
@@ -268,7 +268,7 @@ func _cat_food_sell_pressed() -> void:
 #------KATANA---------
 func _katana_buy_pressed() -> void:
 	if katana_owned == 0:# and game_manager.money >= katana_current_price:
-		game_manager.money -= katana_current_price
+		Global.money -= katana_current_price
 		katana_owned = 1
 		UI.update_money()
 		katana.show()
@@ -276,7 +276,7 @@ func _katana_buy_pressed() -> void:
 func _katana_sell_pressed() -> void:
 	if katana_owned == 1:
 		var sell_price = int(katana_current_price * 0.9) # Luxus padá rýchlejšie
-		game_manager.money += sell_price
+		Global.money += sell_price
 		katana_owned = 0
 		katana.hide()
 		UI.update_money()
@@ -284,7 +284,7 @@ func _katana_sell_pressed() -> void:
 #------ARMOUR---------
 func _armour_buy_pressed() -> void:
 	if armour_owned == 0:# and game_manager.money >= armour_current_price:
-		game_manager.money -= armour_current_price
+		Global.money -= armour_current_price
 		armour_owned = 1
 		UI.update_money()
 		armour.show()
@@ -292,7 +292,7 @@ func _armour_buy_pressed() -> void:
 func _armour_sell_pressed() -> void:
 	if armour_owned == 1:
 		var sell_price = int(armour_current_price * 0.8)
-		game_manager.money += sell_price
+		Global.money += sell_price
 		armour_owned = 0
 		armour.hide()
 		UI.update_money()

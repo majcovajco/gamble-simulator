@@ -27,5 +27,13 @@ Besides being a passion project, I am building this game to deepen my understand
 * Expand the shop with more unlockable items
 * Implement save/load system
 * Export to HTML5 for browser play
-* Add job opportunities and actual work mechanics
 * Add events manipulating the market prices
+* Add interactive minigames for all jobs (Pizza chef, Post delivery)
+
+## Changelog / Patch Notes
+
+**v0.2.0 - Work & UI Update**
+* **New Feature:** Added "Work" mechanics with a job selection popup menu.
+* **New Minigame:** Gardener minigame with plant spawning and scissors cursor. UI counting score of the player.
+* **UI/UX Improvements:** Overhauled anchoring and scaling for all UI elements (Monitor, Shop, Casino, Death Screen, Work Popup) making the game responsive across different monitor resolutions and aspect ratios.
+* **Architecture:** Migrated global variables (money, day, hunger) to a centralized `Global` Autoload script for better data state management.

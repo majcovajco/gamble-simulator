@@ -45,11 +45,17 @@
 [ext_resource type="Texture2D" uid="uid://q45nytratf1u" path="res://assets/armour_icon.png" id="41_458eo"]
 [ext_resource type="Texture2D" uid="uid://bhu1rbf6bu0dt" path="res://assets/katana_stena.png" id="42_pr1ej"]
 [ext_resource type="Texture2D" uid="uid://bslsy4uggh8nn" path="res://assets/toaletak_room.png" id="43_05nbr"]
+[ext_resource type="Texture2D" uid="uid://bt404543gpr1n" path="res://assets/work_popup2.png" id="44_pf7vy"]
 [ext_resource type="Texture2D" uid="uid://d3p4tn5waovjp" path="res://assets/armour_room.png" id="45_h3rex"]
+[ext_resource type="Texture2D" uid="uid://b25vei8lepski" path="res://assets/gardener_icon.png" id="45_pf7vy"]
 [ext_resource type="Texture2D" uid="uid://c8lljanq23amo" path="res://assets/shelf.png" id="46_fedci"]
+[ext_resource type="Texture2D" uid="uid://d4hel3kntlkv5" path="res://assets/pizzachef_icon.png" id="46_kh3m1"]
+[ext_resource type="Texture2D" uid="uid://ijec4vjew0b5" path="res://assets/postman_icon.png" id="47_7rj2c"]
 [ext_resource type="Texture2D" uid="uid://bbcbsvuovec44" path="res://assets/wine.png" id="47_8qswn"]
 [ext_resource type="Texture2D" uid="uid://8tw20in6cm14" path="res://assets/liquor_bottle.png" id="48_rm0al"]
 [ext_resource type="Texture2D" uid="uid://d3kb8pput75mp" path="res://assets/liquor_bottle2.png" id="49_i4re6"]
+[ext_resource type="Texture2D" uid="uid://b6xe11f0q6f5x" path="res://assets/work_button.png" id="50_wd9kq"]
+[ext_resource type="Script" uid="uid://dh2iiuv83v7hg" path="res://scripts/work_button.gd" id="51_j2p8w"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
 normal = Vector2(-1, 0)
@@ -2340,7 +2346,7 @@ script = ExtResource("3_lbhrr")
 
 [node name="Camera2D" type="Camera2D" parent="player" unique_id=1267608267]
 position = Vector2(1, -21)
-zoom = Vector2(5.5, 5.5)
+zoom = Vector2(3.8, 3.8)
 limit_left = -370
 limit_right = 271
 position_smoothing_enabled = true
@@ -2471,10 +2477,13 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -768.5
-offset_top = -861.0
+offset_top = -800.0
 offset_right = 768.5
+offset_bottom = 61.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(0.65, 0.65)
+pivot_offset = Vector2(750.5, 821.0)
 texture = ExtResource("13_kvuet")
 expand_mode = 1
 
@@ -2914,14 +2923,220 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="UI/Death_screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="deathscreen_pic" type="TextureRect" parent="UI/Death_screen" unique_id=1507850787]
-layout_mode = 0
-offset_left = -181.0
-offset_top = -44.0
-offset_right = 2021.6563
-offset_bottom = 1066.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("16_ca42v")
 expand_mode = 1
+stretch_mode = 5
+
+[node name="job_select_picture" type="TextureRect" parent="UI" unique_id=40121328]
+clip_contents = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -420.0
+offset_top = -430.0
+offset_right = 420.0
+offset_bottom = 430.0
+scale = Vector2(0.65, 0.65)
+pivot_offset = Vector2(420, 430)
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("44_pf7vy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="scrollbar_job_select" type="ScrollContainer" parent="UI/job_select_picture" unique_id=16464055]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_top = 0.1
+anchor_right = 0.92
+anchor_bottom = 0.90
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="jobs_container" type="VBoxContainer" parent="UI/job_select_picture/scrollbar_job_select" unique_id=1182278180]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="gardener_job" type="PanelContainer" parent="UI/job_select_picture/scrollbar_job_select/jobs_container" unique_id=1233500458]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/gardener_job" unique_id=802586278]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="gardener_icon" type="TextureRect" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/gardener_job/HBoxContainer" unique_id=1001683153]
+custom_minimum_size = Vector2(150, 92)
+layout_mode = 2
+texture = ExtResource("45_pf7vy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="job_description" type="Label" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/gardener_job/HBoxContainer" unique_id=1853872043]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/line_spacing = 2
+theme_override_fonts/font = ExtResource("37_rm0al")
+text = "Gardener
+Doesn't pay the best but at laest you're on fresh air..."
+autowrap_mode = 2
+
+[node name="work_button" type="TextureButton" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/gardener_job/HBoxContainer" unique_id=1592324857]
+custom_minimum_size = Vector2(230, 96)
+layout_mode = 2
+texture_normal = ExtResource("50_wd9kq")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("51_j2p8w")
+
+[node name="Label" type="Label" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/gardener_job/HBoxContainer/work_button" unique_id=1209090391]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42200002
+anchor_top = 0.41500002
+anchor_right = 0.5
+anchor_bottom = 0.58000004
+offset_left = -1.0600052
+offset_right = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.18039216, 0.09411765, 0.023529412, 1)
+theme_override_fonts/font = ExtResource("11_kvpfn")
+theme_override_font_sizes/font_size = 24
+text = "WORK"
+
+[node name="pizza_job" type="PanelContainer" parent="UI/job_select_picture/scrollbar_job_select/jobs_container" unique_id=1464493089]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/pizza_job" unique_id=2106683094]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="pizza_icon" type="TextureRect" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/pizza_job/HBoxContainer" unique_id=312846085]
+custom_minimum_size = Vector2(150, 92)
+layout_mode = 2
+texture = ExtResource("46_kh3m1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="job_description" type="Label" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/pizza_job/HBoxContainer" unique_id=1882940639]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/line_spacing = 2
+theme_override_fonts/font = ExtResource("37_rm0al")
+text = "Pizza chef
+Lots of pressure in the kitchen, might look good on your CV"
+autowrap_mode = 2
+
+[node name="work_button" type="TextureButton" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/pizza_job/HBoxContainer" unique_id=2008450711]
+custom_minimum_size = Vector2(230, 96)
+layout_mode = 2
+texture_normal = ExtResource("50_wd9kq")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("51_j2p8w")
+
+[node name="Label" type="Label" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/pizza_job/HBoxContainer/work_button" unique_id=700474178]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.41300002
+anchor_top = 0.41500002
+anchor_right = 0.5
+anchor_bottom = 0.605
+offset_left = 0.009994507
+offset_right = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.18039216, 0.09411765, 0.023529412, 1)
+theme_override_fonts/font = ExtResource("11_kvpfn")
+theme_override_font_sizes/font_size = 24
+text = "WORK"
+
+[node name="postman_job" type="PanelContainer" parent="UI/job_select_picture/scrollbar_job_select/jobs_container" unique_id=1840357040]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/postman_job" unique_id=1641663593]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="postman_icon" type="TextureRect" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/postman_job/HBoxContainer" unique_id=1277916958]
+custom_minimum_size = Vector2(150, 92)
+layout_mode = 2
+texture = ExtResource("47_7rj2c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="job_description" type="Label" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/postman_job/HBoxContainer" unique_id=938880718]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/line_spacing = 2
+theme_override_fonts/font = ExtResource("37_rm0al")
+text = "Post delivery
+Do you like running... especially from dogs? Hired!"
+autowrap_mode = 2
+
+[node name="work_button" type="TextureButton" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/postman_job/HBoxContainer" unique_id=424770908]
+custom_minimum_size = Vector2(230, 96)
+layout_mode = 2
+texture_normal = ExtResource("50_wd9kq")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("51_j2p8w")
+
+[node name="Label" type="Label" parent="UI/job_select_picture/scrollbar_job_select/jobs_container/postman_job/HBoxContainer/work_button" unique_id=1735025110]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42600003
+anchor_top = 0.41500002
+anchor_right = 0.5
+anchor_bottom = 0.57500005
+offset_left = 0.019996643
+offset_right = 117.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.18039216, 0.09411765, 0.023529412, 1)
+theme_override_fonts/font = ExtResource("11_kvpfn")
+theme_override_font_sizes/font_size = 24
+text = "WORK"
 
 [node name="bought_objects" type="Node2D" parent="." unique_id=488540674]
 
@@ -3130,6 +3345,7 @@ texture = ExtResource("47_8qswn")
 [connection signal="pressed" from="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop/VBoxContainer/katana_container/HBoxContainer/VBoxContainer/HBoxContainer2/sell" to="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop" method="_katana_sell_pressed"]
 [connection signal="pressed" from="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop/VBoxContainer/armour_container/HBoxContainer/VBoxContainer/HBoxContainer2/buy" to="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop" method="_armour_buy_pressed"]
 [connection signal="pressed" from="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop/VBoxContainer/armour_container/HBoxContainer/VBoxContainer/HBoxContainer2/sell" to="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop" method="_armour_sell_pressed"]
+[connection signal="pressed" from="UI/job_select_picture/scrollbar_job_select/jobs_container/gardener_job/HBoxContainer/work_button" to="UI/job_select_picture/scrollbar_job_select/jobs_container/gardener_job/HBoxContainer/work_button" method="_on_gardener_pressed"]
 
 [editable path="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop/VBoxContainer/luck_container"]
 [editable path="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop/VBoxContainer/toaletak_container"]

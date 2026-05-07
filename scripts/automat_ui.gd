@@ -179,12 +179,12 @@ func check_win_value (symbol):
 func _on_spin_button_pressed() -> void:
 	await fake_spin()
 	spin()
-	game_manager.money -= 1 * win_multiplayer
+	Global.money -= 1 * win_multiplayer
 	UI.update_money()
 	var vyhra = win_check()
 	print("vyhral si:", vyhra)
 	# zaokrúhlujeme lebo multiplayer je divoký
-	game_manager.money += snapped((vyhra * win_multiplayer), 0.01)
+	Global.money += snapped((vyhra * win_multiplayer), 0.01)
 	#upraví label win_amount a na koniec hodí žltý $ sing, zavlní sa pri výhre väčšej ako 5€
 	if (vyhra * win_multiplayer) < 5:
 		amount_won.text = "[color=white]" + str(vyhra * win_multiplayer) + "[/color][color=yellow]$[/color]"

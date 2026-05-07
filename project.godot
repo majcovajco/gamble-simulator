@@ -18,6 +18,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*uid://c8dqdede0a0ul"
+Global="*res://scripts/global.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [input]
 

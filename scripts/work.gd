@@ -16,8 +16,11 @@ func _on_body_entered(body):
 func _on_body_exited(body):
 	work_text.visible = false
 	player_in_range = false
+	UI.close_job_menu()
 	
 func _process(delta):
-	if player_in_range and Input.is_action_just_pressed("interract") and game_manager.worked_today == false:
-		game_manager.work()
-		UI.fade()
+	if player_in_range and Input.is_action_just_pressed("interract"):
+		UI.toggle_job_menu()
+
+func _on_ready() -> void:
+	_ready()

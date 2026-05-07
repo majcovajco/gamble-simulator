@@ -14,6 +14,7 @@ func _on_body_entered(body):
 func _on_body_exited(body):
 	E.visible = false
 	player_in_range = false
+	UI.close_monitor()
 	
 func _process(delta):
 	if player_in_range and Input.is_action_just_pressed("interract"):
