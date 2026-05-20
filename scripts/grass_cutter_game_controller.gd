@@ -13,9 +13,16 @@ const CURSOR_HOTSPOT_OFFSET = Vector2(10, 20)
 @onready var score_label = $"../HUD/TopBar/ScoreLabel"
 @onready var lives_label = $"../HUD/TopBar/LivesLabel"
 @onready var end_panel = $"../HUD/EndPanel"
+@onready var end_money_label = $"../HUD/EndPanel/EndMoneyLabel"
+@onready var end_msg = $"../HUD/EndPanel/msg_end"
 
+# flag for end msg
+var kytka_down = false
+#-------
 var score = 0
 var lives = 3
+var missed_weeds = 0
+var difficulty_multiplier = 1.0
 var occupied_points: Array = []
 
 func _ready() -> void:
@@ -45,12 +52,57 @@ func _spawn_plant() -> void:
 	obj.position = chosen.position
 	obj.spawn_point = chosen
 	obj.connect("plant_clicked", _on_plant_clicked)
+	obj.connect("plant_despawned", _on_plant_despawned)
+	
+	obj.current_difficulty = difficulty_multiplier
+	
+	spawn_timer.wait_time = max(0.4, 1.5 / difficulty_multiplier)
 	spawn_layer.add_child(obj)
 
-func _on_plant_clicked(obj, spawn_point) -> void:
+	difficulty_multiplier += 0.05
+
+func _on_plant_clicked(obj, spawn_point, plant_type) -> void:
 	occupied_points.erase(spawn_point)
-	score += 10
+
+	match plant_type:
+		"grass":
+			score += int(3 * difficulty_multiplier)
+		"flower":
+			game_over()
+		"branch":
+			score += int(10 * difficulty_multiplier)
+		"weed":
+			var random_chance = randf()
+			if random_chance < 0.33:
+				kytka_down = true
+				game_over()
+			elif random_chance < 0.66:
+				score += int(3 * difficulty_multiplier)
+			else:
+				score += int(10 * difficulty_multiplier)
+
 	score_label.text = "Score: " + str(score)
+
+func _on_plant_despawned(obj, spawn_point, plant_type) -> void:
+	occupied_points.erase(spawn_point)
+	if plant_type == "grass" or plant_type == "branch":
+		missed_weeds += 1
+		if lives > 0:
+			lives -= 1
+		lives_label.text = "Lives: " + str(lives)
+		if missed_weeds >= 3:
+			game_over()
+
+func game_over() -> void:
+	spawn_timer.stop()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	end_panel.show()
+	end_money_label.text = "Earned: " + str(score) + "$"
+	if kytka_down:
+		end_msg.text = "Try not to cut the flowers..."
+		kytka_down = false
+	else:
+		end_msg.text = "Your hands fast, but weeds faster"
 
 func _on_back_button_pressed() -> void:
 	confirm_popup.show()
@@ -61,3 +113,8 @@ func _on_confirm_yes_button_pressed() -> void:
 
 func _on_confirm_no_button_pressed() -> void:
 	confirm_popup.hide()
+
+func _on_ok_button_pressed() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	Global.money += score
