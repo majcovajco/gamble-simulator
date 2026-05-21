@@ -78,8 +78,11 @@ func toggle_job_menu():
 	job_select_picture.visible = !job_select_picture.visible
 
 func start_grass_cutter():
-	get_tree().change_scene_to_file("res://scenes/grass_cutter.tscn")
-
+		if Global.worked_today == false:
+			#zapne scénu
+			get_tree().change_scene_to_file("res://scenes/grass_cutter.tscn")
+		else:
+			print("Už si dnes pracoval! Choď spať.")
 
 func _on_shop_btn_pressed() -> void:
 	print("shop stlačený")

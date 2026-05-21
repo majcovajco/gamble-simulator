@@ -103,6 +103,7 @@ func game_over() -> void:
 		kytka_down = false
 	else:
 		end_msg.text = "Your hands fast, but weeds faster"
+	Global.worked_today = true
 
 func _on_back_button_pressed() -> void:
 	confirm_popup.show()
@@ -118,3 +119,4 @@ func _on_ok_button_pressed() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
 	Global.money += score
+	Global.worked_today = true
