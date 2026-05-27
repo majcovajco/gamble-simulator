@@ -1,6 +1,11 @@
 extends ScrollContainer
 @onready var luck_price = $VBoxContainer/luck_container/HBoxContainer/VBoxContainer/HBoxContainer/item_price
-@onready var toaletak_price = $VBoxContainer/toaletak_container/HBoxContainer/VBoxContainer/HBoxContainer/item_price
+@onready var toaletak_price_label = $VBoxContainer/toaletak_container/HBoxContainer/VBoxContainer/HBoxContainer/item_price
+@onready var whisky_price_label = $VBoxContainer/whisky_container/HBoxContainer/VBoxContainer/HBoxContainer/item_price
+@onready var dog_food_price_label = $VBoxContainer/dog_food_container/HBoxContainer/VBoxContainer/HBoxContainer/item_price
+@onready var cat_food_price_label = $VBoxContainer/cat_food_container/HBoxContainer/VBoxContainer/HBoxContainer/item_price
+@onready var katana_price_label = $VBoxContainer/katana_container/HBoxContainer/VBoxContainer/HBoxContainer/item_price
+@onready var armour_price_label = $VBoxContainer/armour_container/HBoxContainer/VBoxContainer/HBoxContainer/item_price
 @onready var UI = %UI
 @onready var game_manager = %GameManager
 @onready var luck_progress_bar = $VBoxContainer/luck_container/HBoxContainer/VBoxContainer/Luck_ProgressBar
@@ -63,21 +68,21 @@ var cat_food_owned = 0
 var katana_owned = 0
 var armour_owned = 0
 
-# Aktuálne trhové ceny (Neskôr sa budú dať meniť podľa udalostí vo svete)
-var toaletak_current_price = 100
-var whisky_current_price = 300
-var dog_food_current_price = 250
-var cat_food_current_price = 200
-var katana_current_price = 20000
-var armour_current_price = 25000
+func update_market_prices() -> void:
+	if toaletak_price_label != null:
+		toaletak_price_label.text = str(Global.items["toaletak"]["current_price"])
+		whisky_price_label.text = str(Global.items["whisky"]["current_price"])
+		dog_food_price_label.text = str(Global.items["dog_food"]["current_price"])
+		cat_food_price_label.text = str(Global.items["cat_food"]["current_price"])
+		katana_price_label.text = str(Global.items["katana"]["current_price"])
+		armour_price_label.text = str(Global.items["armour"]["current_price"])
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	luck_price.text = str(luck_price_arr[luck_owned])
-	toaletak_price.text = str(100)
+	update_market_prices()
 	update_market_tooltips()
-	#toaletak_amount.text = str(toaletaky_owned)
-	
+
 	# Inicializácia ProgressBaru pre Luck
 	luck_progress_bar.max_value = luck_price_arr.size()
 	luck_progress_bar.value = luck_owned
@@ -182,16 +187,16 @@ func update_cat_food_visuals() -> void:
 #------TOALETAK---------
 func _toaletak_buy_pressed() -> void:
 	if toaletaky_owned < 1000:# and game_manager.money >= toaletak_current_price:
-		Global.money -= toaletak_current_price
+		Global.money -= Global.items["toaletak"]["current_price"]
 		toaletaky_owned += 1
 		toaletak_amount.text = str(toaletaky_owned)
-		update_toaletak_visuals() # Voláme našu funkciu na aktualizáciu obrázkov
+		update_toaletak_visuals() # Vol�me na�u funkciu na aktualiz�ciu obr�zkov
 		UI.update_money()
 
 func _toaletak_sell_pressed() -> void:
 	if toaletaky_owned > 0:
-		# vždy predáš jemne pod cenu trhu (napr. 90% neskôr upravím)
-		var sell_price = int(toaletak_current_price * 0.95)
+		# v�dy pred� jemne pod cenu trhu (napr. 90% nesk�r uprav�m)
+		var sell_price = int(Global.items["toaletak"]["current_price"] * 0.95)
 		Global.money += sell_price
 		toaletaky_owned -= 1
 		toaletak_amount.text = str(toaletaky_owned)
@@ -214,7 +219,7 @@ func _luck_buy_pressed() -> void:
 #------WHISKY---------
 func _whisky_buy_pressed() -> void:
 	if whisky_owned < 1000:# and game_manager.money >= whisky_current_price:
-		Global.money -= whisky_current_price
+		Global.money -= Global.items["whisky"]["current_price"]
 		whisky_owned += 1
 		whisky_amount.text = str(whisky_owned)
 		update_whisky_visuals()
@@ -222,7 +227,7 @@ func _whisky_buy_pressed() -> void:
 
 func _whisky_sell_pressed() -> void:
 	if whisky_owned > 0:
-		var sell_price = int(whisky_current_price * 0.95)
+		var sell_price = int(Global.items["whisky"]["current_price"] * 0.95)
 		Global.money += sell_price
 		whisky_owned -= 1
 		whisky_amount.text = str(whisky_owned)
@@ -232,7 +237,7 @@ func _whisky_sell_pressed() -> void:
 #------DOG FOOD---------
 func dog_food_buy_pressed() -> void:
 	if dog_food_owned < 1000:# and game_manager.money >= dog_food_current_price:
-		Global.money -= dog_food_current_price
+		Global.money -= Global.items["dog_food"]["current_price"]
 		dog_food_owned += 1
 		dog_food_amount.text = str(dog_food_owned)
 		update_dog_food_visuals()
@@ -240,7 +245,7 @@ func dog_food_buy_pressed() -> void:
 
 func _dog_food_sell_pressed() -> void:
 	if dog_food_owned > 0:
-		var sell_price = int(dog_food_current_price * 0.95)
+		var sell_price = int(Global.items["dog_food"]["current_price"] * 0.95)
 		Global.money += sell_price
 		dog_food_owned -= 1
 		dog_food_amount.text = str(dog_food_owned)
@@ -250,7 +255,7 @@ func _dog_food_sell_pressed() -> void:
 #------CAT FOOD---------
 func _cat_food_buy_pressed() -> void:
 	if cat_food_owned < 1000:# and game_manager.money >= cat_food_current_price:
-		Global.money -= cat_food_current_price
+		Global.money -= Global.items["cat_food"]["current_price"]
 		cat_food_owned += 1
 		cat_food_amount.text = str(cat_food_owned)
 		update_cat_food_visuals()
@@ -258,7 +263,7 @@ func _cat_food_buy_pressed() -> void:
 
 func _cat_food_sell_pressed() -> void:
 	if cat_food_owned > 0:
-		var sell_price = int(cat_food_current_price * 0.95)
+		var sell_price = int(Global.items["cat_food"]["current_price"] * 0.95)
 		Global.money += sell_price
 		cat_food_owned -= 1
 		cat_food_amount.text = str(cat_food_owned)
@@ -268,14 +273,14 @@ func _cat_food_sell_pressed() -> void:
 #------KATANA---------
 func _katana_buy_pressed() -> void:
 	if katana_owned == 0:# and game_manager.money >= katana_current_price:
-		Global.money -= katana_current_price
+		Global.money -= Global.items["katana"]["current_price"]
 		katana_owned = 1
 		UI.update_money()
 		katana.show()
 
 func _katana_sell_pressed() -> void:
 	if katana_owned == 1:
-		var sell_price = int(katana_current_price * 0.9) # Luxus padá rýchlejšie
+		var sell_price = int(Global.items["katana"]["current_price"] * 0.9) # Luxus pad� r�chlej�ie
 		Global.money += sell_price
 		katana_owned = 0
 		katana.hide()
@@ -284,14 +289,14 @@ func _katana_sell_pressed() -> void:
 #------ARMOUR---------
 func _armour_buy_pressed() -> void:
 	if armour_owned == 0:# and game_manager.money >= armour_current_price:
-		Global.money -= armour_current_price
+		Global.money -= Global.items["armour"]["current_price"]
 		armour_owned = 1
 		UI.update_money()
 		armour.show()
 
 func _armour_sell_pressed() -> void:
 	if armour_owned == 1:
-		var sell_price = int(armour_current_price * 0.8)
+		var sell_price = int(Global.items["armour"]["current_price"] * 0.8)
 		Global.money += sell_price
 		armour_owned = 0
 		armour.hide()
@@ -309,12 +314,12 @@ func get_sell_tooltip(current_price: int, base_price: int, margin: float) -> Str
 		
 	return text
 	
-#funkciu volať vždy, keď sa zmenia ceny na trhu (a aj raz v _ready()):
+#funkciu vola� v�dy, ke� sa zmenia ceny na trhu (a aj raz v _ready()):
 func update_market_tooltips() -> void:
-	# (Aktuálna cena, Pôvodná hodnota, Marža/Zrážka)
-	toaletak_sell_btn.tooltip_text = get_sell_tooltip(toaletak_current_price, 100, 0.95)
-	whisky_sell_btn.tooltip_text = get_sell_tooltip(whisky_current_price, 100, 0.95)
-	dog_food_sell_btn.tooltip_text = get_sell_tooltip(dog_food_current_price, 100, 0.95)
-	cat_food_sell_btn.tooltip_text = get_sell_tooltip(cat_food_current_price, 100, 0.95)
-	katana_sell_btn.tooltip_text = get_sell_tooltip(katana_current_price, 100, 0.95)
-	armour_sell_btn.tooltip_text = get_sell_tooltip(armour_current_price, 100, 0.95)
+	# (Aktu�lna cena, P�vodn� hodnota, Mar�a/Zr�ka)
+	toaletak_sell_btn.tooltip_text = get_sell_tooltip(Global.items["toaletak"]["current_price"], 100, 0.95)
+	whisky_sell_btn.tooltip_text = get_sell_tooltip(Global.items["whisky"]["current_price"], 100, 0.95)
+	dog_food_sell_btn.tooltip_text = get_sell_tooltip(Global.items["dog_food"]["current_price"], 100, 0.95)
+	cat_food_sell_btn.tooltip_text = get_sell_tooltip(Global.items["cat_food"]["current_price"], 100, 0.95)
+	katana_sell_btn.tooltip_text = get_sell_tooltip(Global.items["katana"]["current_price"], 100, 0.95)
+	armour_sell_btn.tooltip_text = get_sell_tooltip(Global.items["armour"]["current_price"], 100, 0.95)
