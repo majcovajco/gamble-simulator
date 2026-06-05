@@ -35,3 +35,13 @@ var events = {
 		"modifiers": {} # Znamená, že ceny idú na normál
 	}
 }
+
+# "owned" - number used for logic and operations
+var luck_owned = 0
+var toaletaky_owned = 0
+var whisky_owned = 0
+var dog_food_owned = 0
+var cat_food_owned = 0
+# Base "owned" trackers pre unikatne veci
+var katana_owned = 0
+var armour_owned = 0

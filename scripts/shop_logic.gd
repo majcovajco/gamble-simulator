@@ -57,17 +57,6 @@ extends ScrollContainer
 
 var luck_price_arr = [100, 150, 275, 450, 700, 1100, 1800, 3000, 4500, 7000]
 
-# "owned" - number used for logic and operations
-var luck_owned = 0
-var toaletaky_owned = 0
-var whisky_owned = 0
-var dog_food_owned = 0
-var cat_food_owned = 0
-
-# Base "owned" trackers pre unikatne veci
-var katana_owned = 0
-var armour_owned = 0
-
 func update_market_prices() -> void:
 	if toaletak_price_label != null:
 		toaletak_price_label.text = str(Global.items["toaletak"]["current_price"])
@@ -79,13 +68,18 @@ func update_market_prices() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	luck_price.text = str(luck_price_arr[luck_owned])
+	luck_price.text = str(luck_price_arr[Global.luck_owned])
 	update_market_prices()
 	update_market_tooltips()
+	update_toaletak_visuals()
+	toaletak_amount.text = str(Global.toaletaky_owned)
+	whisky_amount.text = str(Global.whisky_owned)
+	dog_food_amount.text = str(Global.dog_food_owned)
+	cat_food_amount.text = str(Global.cat_food_owned)
 
 	# Inicializácia ProgressBaru pre Luck
 	luck_progress_bar.max_value = luck_price_arr.size()
-	luck_progress_bar.value = luck_owned
+	luck_progress_bar.value = Global.luck_owned
 
 #--------- buy and sell logic & button bindings ------------
 
@@ -101,25 +95,25 @@ func update_toaletak_visuals() -> void:
 	toaletak9.hide()
 	toaletak10.hide()
 	
-	if toaletaky_owned > 9:
+	if Global.toaletaky_owned > 9:
 		toaletak.show(); toaletak2.show(); toaletak3.show(); toaletak4.show(); toaletak5.show(); toaletak6.show(); toaletak7.show(); toaletak8.show(); toaletak9.show(); toaletak10.show()
-	elif toaletaky_owned > 8:
+	elif Global.toaletaky_owned > 8:
 		toaletak.show(); toaletak2.show(); toaletak3.show(); toaletak4.show(); toaletak5.show(); toaletak6.show(); toaletak7.show(); toaletak8.show(); toaletak9.show()
-	elif toaletaky_owned > 7:
+	elif Global.toaletaky_owned > 7:
 		toaletak.show(); toaletak2.show(); toaletak3.show(); toaletak4.show(); toaletak5.show(); toaletak6.show(); toaletak7.show(); toaletak8.show()
-	elif toaletaky_owned > 6:
+	elif Global.toaletaky_owned > 6:
 		toaletak.show(); toaletak2.show(); toaletak3.show(); toaletak4.show(); toaletak5.show(); toaletak6.show(); toaletak7.show()
-	elif toaletaky_owned > 5:
+	elif Global.toaletaky_owned > 5:
 		toaletak.show(); toaletak2.show(); toaletak3.show(); toaletak4.show(); toaletak5.show(); toaletak6.show()
-	elif toaletaky_owned > 4:
+	elif Global.toaletaky_owned > 4:
 		toaletak.show(); toaletak2.show(); toaletak3.show(); toaletak4.show(); toaletak5.show()
-	elif toaletaky_owned > 3:
+	elif Global.toaletaky_owned > 3:
 		toaletak.show(); toaletak2.show(); toaletak3.show(); toaletak4.show()
-	elif toaletaky_owned > 2:
+	elif Global.toaletaky_owned > 2:
 		toaletak.show(); toaletak2.show(); toaletak3.show()
-	elif toaletaky_owned > 1:
+	elif Global.toaletaky_owned > 1:
 		toaletak.show(); toaletak2.show()
-	elif toaletaky_owned > 0:
+	elif Global.toaletaky_owned > 0:
 		toaletak.show()
 
 func update_whisky_visuals() -> void:
@@ -134,23 +128,23 @@ func update_whisky_visuals() -> void:
 	whisky3.hide()
 	wine2.hide()
 	
-	if whisky_owned > 8:
+	if Global.whisky_owned > 8:
 		alko_skrinka.show(); whisky.show(); wine.show(); liquor.show(); liquor2.show(); liquor3.show(); liquor4.show(); whisky2.show(); whisky3.show(); wine2.show()
-	elif whisky_owned > 7:
+	elif Global.whisky_owned > 7:
 		alko_skrinka.show(); whisky.show(); wine.show(); liquor.show(); liquor2.show(); liquor3.show(); liquor4.show(); whisky2.show(); whisky3.show()
-	elif whisky_owned > 6:
+	elif Global.whisky_owned > 6:
 		alko_skrinka.show(); whisky.show(); wine.show(); liquor.show(); liquor2.show(); liquor3.show(); liquor4.show(); whisky2.show()
-	elif whisky_owned > 5:
+	elif Global.whisky_owned > 5:
 		alko_skrinka.show(); whisky.show(); wine.show(); liquor.show(); liquor2.show(); liquor3.show(); liquor4.show()
-	elif whisky_owned > 4:
+	elif Global.whisky_owned > 4:
 		alko_skrinka.show(); whisky.show(); wine.show(); liquor.show(); liquor2.show(); liquor3.show()
-	elif whisky_owned > 3:
+	elif Global.whisky_owned > 3:
 		alko_skrinka.show(); whisky.show(); wine.show(); liquor.show(); liquor2.show()
-	elif whisky_owned > 2:
+	elif Global.whisky_owned > 2:
 		alko_skrinka.show(); whisky.show(); wine.show(); liquor.show()
-	elif whisky_owned > 1:
+	elif Global.whisky_owned > 1:
 		alko_skrinka.show(); whisky.show(); wine.show()
-	elif whisky_owned > 0:
+	elif Global.whisky_owned > 0:
 		alko_skrinka.show(); whisky.show()
 
 func update_dog_food_visuals() -> void:
@@ -158,14 +152,14 @@ func update_dog_food_visuals() -> void:
 	dog_food2.hide()
 	dog_food3.hide()
 	
-	if dog_food_owned >= 20:
+	if Global.dog_food_owned >= 20:
 		dog_food.show()
 		dog_food2.show()
 		dog_food3.show()
-	elif dog_food_owned >= 5:
+	elif Global.dog_food_owned >= 5:
 		dog_food.show()
 		dog_food2.show()
-	elif dog_food_owned > 0:
+	elif Global.dog_food_owned > 0:
 		dog_food.show()
 
 func update_cat_food_visuals() -> void:
@@ -173,132 +167,132 @@ func update_cat_food_visuals() -> void:
 	cat_food2.hide()
 	cat_food3.hide()
 	
-	if cat_food_owned >= 20:
+	if Global.cat_food_owned >= 20:
 		cat_food.show()
 		cat_food2.show()
 		cat_food3.show()
-	elif cat_food_owned >= 5:
+	elif Global.cat_food_owned >= 5:
 		cat_food.show()
 		cat_food2.show()
-	elif cat_food_owned > 0:
+	elif Global.cat_food_owned > 0:
 		cat_food.show()
 
 #--------- logic behind UI itmes showing ------------
 #------TOALETAK---------
 func _toaletak_buy_pressed() -> void:
-	if toaletaky_owned < 1000:# and game_manager.money >= toaletak_current_price:
+	if Global.toaletaky_owned < 1000:# and game_manager.money >= toaletak_current_price:
 		Global.money -= Global.items["toaletak"]["current_price"]
-		toaletaky_owned += 1
-		toaletak_amount.text = str(toaletaky_owned)
+		Global.toaletaky_owned += 1
+		toaletak_amount.text = str(Global.toaletaky_owned)
 		update_toaletak_visuals() # Vol�me na�u funkciu na aktualiz�ciu obr�zkov
 		UI.update_money()
 
 func _toaletak_sell_pressed() -> void:
-	if toaletaky_owned > 0:
+	if Global.toaletaky_owned > 0:
 		# v�dy pred� jemne pod cenu trhu (napr. 90% nesk�r uprav�m)
 		var sell_price = int(Global.items["toaletak"]["current_price"] * 0.95)
 		Global.money += sell_price
-		toaletaky_owned -= 1
-		toaletak_amount.text = str(toaletaky_owned)
+		Global.toaletaky_owned -= 1
+		toaletak_amount.text = str(Global.toaletaky_owned)
 		update_toaletak_visuals()
 		UI.update_money()
 
 #------LUCK---------
 func _luck_buy_pressed() -> void:
-	if luck_owned < luck_price_arr.size():
-		Global.money -= luck_price_arr[luck_owned]
-		luck_owned += 1
+	if Global.luck_owned < luck_price_arr.size():
+		Global.money -= luck_price_arr[Global.luck_owned]
+		Global.luck_owned += 1
 		UI.update_money()
 		#Aktualizuje Luck_Progress_Bar!!!
-		luck_progress_bar.value = luck_owned
-		if luck_owned < luck_price_arr.size():
-			luck_price.text = str(luck_price_arr[luck_owned])
+		luck_progress_bar.value = Global.luck_owned
+		if Global.luck_owned < luck_price_arr.size():
+			luck_price.text = str(luck_price_arr[Global.luck_owned])
 		else:
 			luck_price.text = "MAX"
 
 #------WHISKY---------
 func _whisky_buy_pressed() -> void:
-	if whisky_owned < 1000:# and game_manager.money >= whisky_current_price:
+	if Global.whisky_owned < 1000:# and game_manager.money >= whisky_current_price:
 		Global.money -= Global.items["whisky"]["current_price"]
-		whisky_owned += 1
-		whisky_amount.text = str(whisky_owned)
+		Global.whisky_owned += 1
+		whisky_amount.text = str(Global.whisky_owned)
 		update_whisky_visuals()
 		UI.update_money()
 
 func _whisky_sell_pressed() -> void:
-	if whisky_owned > 0:
+	if Global.whisky_owned > 0:
 		var sell_price = int(Global.items["whisky"]["current_price"] * 0.95)
 		Global.money += sell_price
-		whisky_owned -= 1
-		whisky_amount.text = str(whisky_owned)
+		Global.whisky_owned -= 1
+		whisky_amount.text = str(Global.whisky_owned)
 		update_whisky_visuals()
 		UI.update_money()
 
 #------DOG FOOD---------
 func dog_food_buy_pressed() -> void:
-	if dog_food_owned < 1000:# and game_manager.money >= dog_food_current_price:
+	if Global.dog_food_owned < 1000:# and game_manager.money >= dog_food_current_price:
 		Global.money -= Global.items["dog_food"]["current_price"]
-		dog_food_owned += 1
-		dog_food_amount.text = str(dog_food_owned)
+		Global.dog_food_owned += 1
+		dog_food_amount.text = str(Global.dog_food_owned)
 		update_dog_food_visuals()
 		UI.update_money()
 
 func _dog_food_sell_pressed() -> void:
-	if dog_food_owned > 0:
+	if Global.dog_food_owned > 0:
 		var sell_price = int(Global.items["dog_food"]["current_price"] * 0.95)
 		Global.money += sell_price
-		dog_food_owned -= 1
-		dog_food_amount.text = str(dog_food_owned)
+		Global.dog_food_owned -= 1
+		dog_food_amount.text = str(Global.dog_food_owned)
 		update_dog_food_visuals()
 		UI.update_money()
 
 #------CAT FOOD---------
 func _cat_food_buy_pressed() -> void:
-	if cat_food_owned < 1000:# and game_manager.money >= cat_food_current_price:
+	if Global.cat_food_owned < 1000:# and game_manager.money >= cat_food_current_price:
 		Global.money -= Global.items["cat_food"]["current_price"]
-		cat_food_owned += 1
-		cat_food_amount.text = str(cat_food_owned)
+		Global.cat_food_owned += 1
+		cat_food_amount.text = str(Global.cat_food_owned)
 		update_cat_food_visuals()
 		UI.update_money()
 
 func _cat_food_sell_pressed() -> void:
-	if cat_food_owned > 0:
+	if Global.cat_food_owned > 0:
 		var sell_price = int(Global.items["cat_food"]["current_price"] * 0.95)
 		Global.money += sell_price
-		cat_food_owned -= 1
-		cat_food_amount.text = str(cat_food_owned)
+		Global.cat_food_owned -= 1
+		cat_food_amount.text = str(Global.cat_food_owned)
 		update_cat_food_visuals()
 		UI.update_money()
 
 #------KATANA---------
 func _katana_buy_pressed() -> void:
-	if katana_owned == 0:# and game_manager.money >= katana_current_price:
+	if Global.katana_owned == 0:# and game_manager.money >= katana_current_price:
 		Global.money -= Global.items["katana"]["current_price"]
-		katana_owned = 1
+		Global.katana_owned = 1
 		UI.update_money()
 		katana.show()
 
 func _katana_sell_pressed() -> void:
-	if katana_owned == 1:
+	if Global.katana_owned == 1:
 		var sell_price = int(Global.items["katana"]["current_price"] * 0.9) # Luxus pad� r�chlej�ie
 		Global.money += sell_price
-		katana_owned = 0
+		Global.katana_owned = 0
 		katana.hide()
 		UI.update_money()
 
 #------ARMOUR---------
 func _armour_buy_pressed() -> void:
-	if armour_owned == 0:# and game_manager.money >= armour_current_price:
+	if Global.armour_owned == 0:# and game_manager.money >= armour_current_price:
 		Global.money -= Global.items["armour"]["current_price"]
-		armour_owned = 1
+		Global.armour_owned = 1
 		UI.update_money()
 		armour.show()
 
 func _armour_sell_pressed() -> void:
-	if armour_owned == 1:
+	if Global.armour_owned == 1:
 		var sell_price = int(Global.items["armour"]["current_price"] * 0.8)
 		Global.money += sell_price
-		armour_owned = 0
+		Global.armour_owned = 0
 		armour.hide()
 		UI.update_money()
 	

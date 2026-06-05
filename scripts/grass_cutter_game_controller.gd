@@ -103,7 +103,6 @@ func game_over() -> void:
 		kytka_down = false
 	else:
 		end_msg.text = "Your hands fast, but weeds faster"
-	Global.worked_today = true
 
 func _on_back_button_pressed() -> void:
 	confirm_popup.show()

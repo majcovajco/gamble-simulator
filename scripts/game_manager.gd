@@ -7,6 +7,11 @@ extends Node
 var hungry = false
 var death_flag = false
 
+
+############################
+#keď sa zmení scéna zmiznú nakúpené veci fix, hra si musí zapamätávať stav
+############################
+
 func death():
 	death_screen.visible = true
 	player.set_physics_process(false)
