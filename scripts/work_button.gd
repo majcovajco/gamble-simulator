@@ -36,3 +36,6 @@ func _on_button_up() -> void:
 
 func _on_gardener_pressed() -> void:
 	UI.start_grass_cutter()
+	
+func _on_pizza_maker_pressed() -> void:
+	UI.start_pizza_maker()

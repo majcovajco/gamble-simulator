@@ -3338,6 +3338,7 @@ texture = ExtResource("47_8qswn")
 [connection signal="pressed" from="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop/VBoxContainer/armour_container/HBoxContainer/VBoxContainer/HBoxContainer2/buy" to="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop" method="_armour_buy_pressed"]
 [connection signal="pressed" from="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop/VBoxContainer/armour_container/HBoxContainer/VBoxContainer/HBoxContainer2/sell" to="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop" method="_armour_sell_pressed"]
 [connection signal="pressed" from="UI/job_select_picture/scrollbar_job_select/jobs_container/gardener_job/HBoxContainer/work_button" to="UI/job_select_picture/scrollbar_job_select/jobs_container/gardener_job/HBoxContainer/work_button" method="_on_gardener_pressed"]
+[connection signal="pressed" from="UI/job_select_picture/scrollbar_job_select/jobs_container/pizza_job/HBoxContainer/work_button" to="UI/job_select_picture/scrollbar_job_select/jobs_container/pizza_job/HBoxContainer/work_button" method="_on_pizza_maker_pressed"]
 
 [editable path="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop/VBoxContainer/luck_container"]
 [editable path="UI/AutomatUI/monitor_png/shop_background/scrollbar_shop/VBoxContainer/toaletak_container"]

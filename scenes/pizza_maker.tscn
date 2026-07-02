@@ -1,0 +1,293 @@
+[gd_scene format=3 uid="uid://dpph255p8r1dp"]
+
+[ext_resource type="Texture2D" uid="uid://b3i25jpn0t6bw" path="res://assets/pizza_background.png" id="1_s8kkc"]
+[ext_resource type="FontFile" uid="uid://brd06x7ri4pld" path="res://fonts/PixelOperator8-Bold.ttf" id="2_xq0oh"]
+[ext_resource type="FontFile" uid="uid://doqrpobj6uh73" path="res://fonts/PixelOperator8.ttf" id="3_x46re"]
+[ext_resource type="Script" uid="uid://dvvjvw1pm3mj8" path="res://scripts/pizza_game_controller.gd" id="4_omi0q"]
+[ext_resource type="Texture2D" uid="uid://cm452mubisdk2" path="res://assets/pizza_base.png" id="5_6omqv"]
+[ext_resource type="Texture2D" uid="uid://baejt6dm2a8bv" path="res://assets/cheese_pile_button.png" id="6_g5che"]
+[ext_resource type="Texture2D" uid="uid://1o4swnfexwml" path="res://assets/ladle_sauce_button.png" id="7_k3lad"]
+[ext_resource type="Texture2D" uid="uid://bqjhmplc6ij63" path="res://assets/basil_button.png" id="8_v2bas"]
+[ext_resource type="Texture2D" uid="uid://b0lfj4504ib2e" path="res://assets/mushroom_button.png" id="9_m1mus"]
+[ext_resource type="Texture2D" uid="uid://dk5sq5itaeaul" path="res://assets/salami_button.png" id="10_s0sal"]
+
+[node name="pizza_maker" type="Node2D" unique_id=804074983]
+
+[node name="background" type="TextureRect" parent="." unique_id=200466632]
+custom_minimum_size = Vector2(1152, 648)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_s8kkc")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Pizza_game_controller" type="Node" parent="." unique_id=1695700724]
+script = ExtResource("4_omi0q")
+
+[node name="cursor_sprite2D" type="Sprite2D" parent="." unique_id=300000000]
+visible = false
+z_index = 100
+scale = Vector2(0.1, 0.1)
+
+[node name="pizza_base" type="TextureRect" parent="." unique_id=427963936]
+offset_left = 376.0
+offset_top = 150.0
+offset_right = 776.0
+offset_bottom = 500.0
+texture = ExtResource("5_6omqv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IngredientsLayer" type="Node2D" parent="pizza_base" unique_id=2000374556]
+
+[node name="SauceDropArea" type="Control" parent="." unique_id=300000001]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 376.0
+offset_top = 150.0
+offset_right = 776.0
+offset_bottom = 500.0
+mouse_filter = 1
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1155369809]
+
+[node name="Top_bar" type="Panel" parent="HUD" unique_id=501359299]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = -16.0
+offset_bottom = 70.0
+
+[node name="ScoreLabel" type="Label" parent="HUD/Top_bar" unique_id=1715441977]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 16.0
+offset_right = 203.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 30
+text = "Score: 0"
+
+[node name="Pizza_type" type="Label" parent="HUD/Top_bar" unique_id=1586591306]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 16.0
+offset_right = 900.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
+[node name="Back_Button" type="Button" parent="HUD/Top_bar" unique_id=1850025246]
+layout_mode = 0
+offset_left = 951.0
+offset_top = 10.0
+offset_right = 1114.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 28
+text = "Back"
+
+[node name="Time_countdown" type="ProgressBar" parent="HUD" unique_id=1206762884]
+offset_left = 300.0
+offset_top = 90.0
+offset_right = 852.0
+offset_bottom = 120.0
+show_percentage = false
+
+[node name="IngredientContainer" type="HBoxContainer" parent="HUD" unique_id=999999999]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Thrash_Button" type="Button" parent="HUD/IngredientContainer" unique_id=695934010]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 16
+text = "Trash 🗑️"
+
+[node name="Ingredient_Cheese" type="Button" parent="HUD/IngredientContainer" unique_id=888888881]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 16
+text = "Cheese"
+icon = ExtResource("6_g5che")
+
+[node name="Ingredient_Sauce" type="Button" parent="HUD/IngredientContainer" unique_id=888888882]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 16
+text = "Sauce"
+icon = ExtResource("7_k3lad")
+
+[node name="Ingredient_Basil" type="Button" parent="HUD/IngredientContainer" unique_id=888888883]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 16
+text = "Basil"
+icon = ExtResource("8_v2bas")
+
+[node name="Ingredient_Mushroom" type="Button" parent="HUD/IngredientContainer" unique_id=1757036803]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 16
+text = "Mushroom"
+icon = ExtResource("9_m1mus")
+
+[node name="Ingredient_Salami" type="Button" parent="HUD/IngredientContainer" unique_id=1016579049]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 16
+text = "Salami"
+icon = ExtResource("10_s0sal")
+
+[node name="Bake_Button" type="Button" parent="HUD/IngredientContainer" unique_id=965329339]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 16
+text = "Serve ✅"
+
+[node name="confirm_popup" type="Panel" parent="HUD" unique_id=975129495]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -110.0
+offset_right = 210.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ConfirmText" type="Label" parent="HUD/confirm_popup" unique_id=747800582]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 24.0
+offset_right = 392.0
+offset_bottom = 132.0
+theme_override_fonts/font = ExtResource("3_x46re")
+theme_override_font_sizes/font_size = 26
+text = "Tired already?
+You won't get paid."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Confirm_yes" type="Button" parent="HUD/confirm_popup" unique_id=103992987]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 141.0
+offset_right = 189.0
+offset_bottom = 191.0
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 22
+text = "Yes"
+
+[node name="Confirm_no" type="Button" parent="HUD/confirm_popup" unique_id=840664725]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 141.0
+offset_right = 385.0
+offset_bottom = 191.0
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 22
+text = "No"
+
+[node name="end_panel" type="Panel" parent="HUD" unique_id=141516320]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EndTitle" type="Label" parent="HUD/end_panel" unique_id=1458772112]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 31.0
+offset_right = 572.0
+offset_bottom = 75.0
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 32
+text = "Shift Finished"
+horizontal_alignment = 1
+
+[node name="msg_end" type="Label" parent="HUD/end_panel" unique_id=1509511034]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 111.0
+offset_right = 560.0
+offset_bottom = 181.0
+theme_override_fonts/font = ExtResource("3_x46re")
+theme_override_font_sizes/font_size = 24
+text = "Good job!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="End_money_label" type="Label" parent="HUD/end_panel" unique_id=2062717271]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 220.0
+offset_right = 560.0
+offset_bottom = 265.0
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 26
+text = "Earned: 0$"
+horizontal_alignment = 1
+
+[node name="OK_Button" type="Button" parent="HUD/end_panel" unique_id=1331404596]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 310.0
+offset_right = 400.0
+offset_bottom = 370.0
+theme_override_fonts/font = ExtResource("2_xq0oh")
+theme_override_font_sizes/font_size = 36
+text = "OK"
+
+[node name="Pizza_timer" type="Timer" parent="." unique_id=2096014565]
+wait_time = 30.0
+
+[connection signal="pressed" from="HUD/Top_bar/Back_Button" to="Pizza_game_controller" method="_on_back_button_pressed"]
+[connection signal="pressed" from="HUD/IngredientContainer/Thrash_Button" to="Pizza_game_controller" method="_on_thrash_button_pressed"]
+[connection signal="button_down" from="HUD/IngredientContainer/Ingredient_Cheese" to="Pizza_game_controller" method="_on_ingredient_cheese_button_down"]
+[connection signal="button_up" from="HUD/IngredientContainer/Ingredient_Cheese" to="Pizza_game_controller" method="_on_ingredient_cheese_button_up"]
+[connection signal="button_down" from="HUD/IngredientContainer/Ingredient_Sauce" to="Pizza_game_controller" method="_on_ingredient_sauce_button_down"]
+[connection signal="button_up" from="HUD/IngredientContainer/Ingredient_Sauce" to="Pizza_game_controller" method="_on_ingredient_sauce_button_up"]
+[connection signal="button_down" from="HUD/IngredientContainer/Ingredient_Basil" to="Pizza_game_controller" method="_on_ingredient_basil_button_down"]
+[connection signal="button_up" from="HUD/IngredientContainer/Ingredient_Basil" to="Pizza_game_controller" method="_on_ingredient_basil_button_up"]
+[connection signal="button_down" from="HUD/IngredientContainer/Ingredient_Mushroom" to="Pizza_game_controller" method="_on_ingredient_mushroom_button_down"]
+[connection signal="button_up" from="HUD/IngredientContainer/Ingredient_Mushroom" to="Pizza_game_controller" method="_on_ingredient_mushroom_button_up"]
+[connection signal="button_down" from="HUD/IngredientContainer/Ingredient_Salami" to="Pizza_game_controller" method="_on_ingredient_salami_button_down"]
+[connection signal="button_up" from="HUD/IngredientContainer/Ingredient_Salami" to="Pizza_game_controller" method="_on_ingredient_salami_button_up"]
+[connection signal="pressed" from="HUD/IngredientContainer/Bake_Button" to="Pizza_game_controller" method="_on_bake_button_pressed"]
+[connection signal="pressed" from="HUD/confirm_popup/Confirm_yes" to="Pizza_game_controller" method="_on_confirm_yes_pressed"]
+[connection signal="pressed" from="HUD/confirm_popup/Confirm_no" to="Pizza_game_controller" method="_on_confirm_no_pressed"]
