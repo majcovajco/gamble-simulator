@@ -13,8 +13,8 @@ extends Node
 @onready var end_msg = $"../HUD/end_panel/msg_end"
 
 const CURSOR_HOTSPOT_OFFSET = Vector2(10, 20)
-const INITIAL_TIMER_TIME = 10.0
-const TIMER_DECREASE_PER_SERVE = 1.5
+const INITIAL_TIMER_TIME = 8.0
+const TIMER_DECREASE_PER_SERVE = 1.0
 const MIN_TIMER_TIME = 2.0
 const BAD_SERVE_PENALTY = -20
 const TRASH_PENALTY = -10
@@ -165,7 +165,6 @@ func _on_end_ok_pressed() -> void:
 func _on_confirm_no_pressed() -> void:
 	confirm_popup.hide()
 	pizza_timer.paused = false
-	pizza_timer.start()
 	_update_timer_bar()
 
 var pizza_bad = false
@@ -179,13 +178,14 @@ func _on_bake_button_pressed() -> void:
 	if current_order["ingredients"].size() != current_pizza_ingredients.size():
 		pizza_bad = true
 	
-	for i in range (current_pizza_ingredients.size()):
-		if current_order["ingredients"][i] == current_pizza_ingredients[i]:
-			print("ok")
-		else:
-			print("zlá pizza")
-			pizza_bad = true
-			break
+	if not pizza_bad: 
+		for i in range (current_pizza_ingredients.size()):
+			if current_order["ingredients"][i] == current_pizza_ingredients[i]:
+				print("ok")
+			else:
+				print("zlá pizza")
+				pizza_bad = true
+				break
 	
 	if not pizza_bad:
 		#započítame skóre
@@ -213,6 +213,8 @@ func end_game() -> void:
 	end_panel.show()
 	end_money_label.text = "Earned: " + str(score) + "$"
 	end_msg.text = "Time is up!"
+	Global.money += score
+	Global.worked_today = true
 	
 func _on_ingredient_sauce_button_down() -> void:
 	dragging_sauce = true

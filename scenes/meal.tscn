@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dydn7v5hc1k4l"]
+
+[ext_resource type="Script" path="res://scripts/meal.gd" id="1_3f7a8"]
+
+[node name="meal" type="Area2D"]
+script = ExtResource("1_3f7a8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.045, 0.045)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

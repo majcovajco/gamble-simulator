@@ -83,12 +83,22 @@ func start_grass_cutter():
 			get_tree().change_scene_to_file("res://scenes/grass_cutter.tscn")
 		else:
 			print("Už si dnes pracoval! Choď spať.")
+		Global.worked_today == true
 
 func start_pizza_maker():
 	if Global.worked_today == false:
 		get_tree().change_scene_to_file("res://scenes/pizza_maker.tscn")
 	else:
 			print("Už si dnes pracoval! Choď spať.")
+	Global.worked_today == true
+		
+func start_restaurant_game():
+	if Global.worked_today == false:
+		get_tree().change_scene_to_file("res://scenes/server_game.tscn")
+	else:
+			print("Už si dnes pracoval! Choď spať.")
+	Global.worked_today == true
+	
 
 func _on_shop_btn_pressed() -> void:
 	print("shop stlačený")

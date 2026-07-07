@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://1q176w1du6c8"]
+
+[ext_resource type="Script" path="res://scripts/customer.gd" id="1_6hm2k"]
+[ext_resource type="Texture2D" uid="uid://bx87n0q44wsbp" path="res://assets/customer_animation.png" id="1_ktfjk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xss0h"]
+atlas = ExtResource("1_ktfjk")
+region = Rect2(0, 0, 285, 436)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qg4y"]
+atlas = ExtResource("1_ktfjk")
+region = Rect2(285, 0, 285, 436)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rjbu2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xss0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qg4y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fx2s6"]
+size = Vector2(273, 445)
+
+[node name="customer" type="Area2D" unique_id=59703259]
+script = ExtResource("1_6hm2k")
+
+[node name="Despawn_Timer" type="Timer" parent="." unique_id=628927620]
+
+[node name="customer_icon" type="Sprite2D" parent="." unique_id=151299258]
+position = Vector2(0, 8)
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("1_ktfjk")
+region_enabled = true
+region_rect = Rect2(0, 0, 285, 436)
+
+[node name="customer_shape" type="CollisionShape2D" parent="." unique_id=1389941330]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_fx2s6")
