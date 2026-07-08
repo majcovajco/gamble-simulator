@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 450.0
+const SPEED = 700.0
 const INTERACT_RANGE = 90.0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite
@@ -10,6 +10,8 @@ var carried_meal_name: String = ""
 
 func _ready() -> void:
 	_ensure_input_actions()
+	if held_sprite != null:
+		held_sprite.top_level = true
 	_update_held_visual()
 
 func _ensure_input_actions() -> void:
@@ -59,8 +61,8 @@ func _update_held_visual() -> void:
 		held_sprite.visible = false
 		return
 	held_sprite.visible = true
-	held_sprite.position = Vector2(0, -20)
-	held_sprite.scale = Vector2(0.04, 0.04)
+	held_sprite.global_position = global_position + Vector2(0, -36)
+	held_sprite.scale = Vector2(0.09, 0.09)
 	match carried_meal_name:
 		"burger":
 			held_sprite.texture = load("res://assets/burger.png")
@@ -94,10 +96,10 @@ func _physics_process(_delta: float) -> void:
 
 	# Keep player inside the walkable floor area of the restaurant scene.
 	var vp = get_viewport().get_visible_rect()
-	var left: float = 100.0
-	var right: float = vp.size.x - 100.0
-	var top: float = 90.0
-	var bottom: float = vp.size.y - 95.0
+	var left: float = 80.0
+	var right: float = vp.size.x - 80.0
+	var top: float = 120.0
+	var bottom: float = vp.size.y - 60.0
 	global_position.x = clamp(global_position.x, left, right)
 	global_position.y = clamp(global_position.y, top, bottom)
 

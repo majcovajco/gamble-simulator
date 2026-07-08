@@ -6,6 +6,9 @@
 [ext_resource type="FontFile" uid="uid://doqrpobj6uh73" path="res://fonts/PixelOperator8.ttf" id="3_x46re"]
 [ext_resource type="PackedScene" uid="uid://cah7m2jv5xq1p" path="res://scenes/server_player.tscn" id="4_srvpl"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xefu1"]
+size = Vector2(116.99999, 97)
+
 [node name="server_game" type="Node2D" unique_id=561044919]
 
 [node name="game_controler" type="Node" parent="." unique_id=806614886]
@@ -201,9 +204,9 @@ text = "Shift Finished"
 
 [node name="EndMoneyLabel" type="Label" parent="HUD/EndPanel" unique_id=1175224429]
 layout_mode = 0
-offset_left = 72.0
+offset_left = 38.0
 offset_top = 100.0
-offset_right = 354.0
+offset_right = 469.0
 offset_bottom = 140.0
 theme_override_fonts/font = ExtResource("2_xq0oh")
 theme_override_font_sizes/font_size = 28
@@ -211,10 +214,10 @@ horizontal_alignment = 1
 
 [node name="EndMessage" type="Label" parent="HUD/EndPanel" unique_id=130000001]
 layout_mode = 0
-offset_left = 72.0
-offset_top = 140.0
-offset_right = 354.0
-offset_bottom = 178.0
+offset_left = 86.0
+offset_top = 156.0
+offset_right = 368.0
+offset_bottom = 182.0
 theme_override_fonts/font = ExtResource("3_x46re")
 theme_override_font_sizes/font_size = 20
 text = "Good job!"
@@ -233,6 +236,51 @@ offset_bottom = -0.040008545
 theme_override_fonts/font = ExtResource("2_xq0oh")
 theme_override_font_sizes/font_size = 22
 text = "OK"
+
+[node name="tables" type="Node2D" parent="." unique_id=859473216]
+position = Vector2(286.00003, 348)
+
+[node name="table" type="StaticBody2D" parent="tables" unique_id=662437541]
+position = Vector2(-1, -0.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tables/table" unique_id=1822770867]
+position = Vector2(0.9999695, -32.75)
+shape = SubResource("RectangleShape2D_xefu1")
+
+[node name="table2" type="StaticBody2D" parent="tables" unique_id=1075158069]
+position = Vector2(-1, -0.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tables/table2" unique_id=1236474223]
+position = Vector2(288.99997, -35.75)
+shape = SubResource("RectangleShape2D_xefu1")
+
+[node name="table3" type="StaticBody2D" parent="tables" unique_id=1160173169]
+position = Vector2(-1, -0.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tables/table3" unique_id=369334663]
+position = Vector2(578, -29.75)
+shape = SubResource("RectangleShape2D_xefu1")
+
+[node name="table4" type="StaticBody2D" parent="tables" unique_id=1380767440]
+position = Vector2(-1, -0.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tables/table4" unique_id=1181665366]
+position = Vector2(0.9999695, 157.25)
+shape = SubResource("RectangleShape2D_xefu1")
+
+[node name="table5" type="StaticBody2D" parent="tables" unique_id=1966793193]
+position = Vector2(-1, -0.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tables/table5" unique_id=1203316265]
+position = Vector2(287.99997, 156.25)
+shape = SubResource("RectangleShape2D_xefu1")
+
+[node name="table6" type="StaticBody2D" parent="tables" unique_id=1421642185]
+position = Vector2(-1, -0.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tables/table6" unique_id=986542403]
+position = Vector2(578, 165.25)
+shape = SubResource("RectangleShape2D_xefu1")
 
 [connection signal="pressed" from="HUD/TopBar/BackButton" to="game_controler" method="_on_back_button_pressed"]
 [connection signal="pressed" from="HUD/confirmPanel/Yes_Button" to="game_controler" method="_on_yes_button_pressed"]

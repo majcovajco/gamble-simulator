@@ -1,7 +1,16 @@
 [gd_scene format=3 uid="uid://1q176w1du6c8"]
 
-[ext_resource type="Script" path="res://scripts/customer.gd" id="1_6hm2k"]
+[ext_resource type="Script" uid="uid://52wb7jedtwaj" path="res://scripts/customer.gd" id="1_6hm2k"]
 [ext_resource type="Texture2D" uid="uid://bx87n0q44wsbp" path="res://assets/customer_animation.png" id="1_ktfjk"]
+[ext_resource type="Texture2D" uid="uid://bporay4aub0np" path="res://assets/customer2.png" id="2_8qg4y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjbu2"]
+atlas = ExtResource("2_8qg4y")
+region = Rect2(0, 0, 296, 529)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqxhk"]
+atlas = ExtResource("2_8qg4y")
+region = Rect2(296, 0, 296, 529)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xss0h"]
 atlas = ExtResource("1_ktfjk")
@@ -13,6 +22,17 @@ region = Rect2(285, 0, 285, 436)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rjbu2"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjbu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqxhk")
+}],
+"loop": true,
+"name": &"alternative1",
+"speed": 1.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xss0h")
@@ -33,12 +53,12 @@ script = ExtResource("1_6hm2k")
 
 [node name="Despawn_Timer" type="Timer" parent="." unique_id=628927620]
 
-[node name="customer_icon" type="Sprite2D" parent="." unique_id=151299258]
+[node name="customer_icon" type="AnimatedSprite2D" parent="." unique_id=151299258]
 position = Vector2(0, 8)
 scale = Vector2(0.28, 0.28)
-texture = ExtResource("1_ktfjk")
-region_enabled = true
-region_rect = Rect2(0, 0, 285, 436)
+sprite_frames = SubResource("SpriteFrames_rjbu2")
+animation = &"alternative1"
+autoplay = "default"
 
 [node name="customer_shape" type="CollisionShape2D" parent="." unique_id=1389941330]
 position = Vector2(0, 8)

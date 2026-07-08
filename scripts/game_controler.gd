@@ -108,7 +108,7 @@ func _on_meal_collected(spawn_point: Node) -> void:
 	active_meals.erase(spawn_point)
 
 func _on_customer_served(customer: Node) -> void:
-	score += 10
+	score += 30 + (10 * difficulty_multiplier)
 	difficulty_multiplier += 0.08
 	active_customers.erase(customer)
 	update_hud()

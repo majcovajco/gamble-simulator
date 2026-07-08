@@ -4,19 +4,23 @@ signal order_chosen(meal_name, customer)
 signal customer_served(customer)
 signal customer_left(customer, was_served)
 
-const ORDER_TIME = 4.5
-const LEAVE_DELAY = 2.4
+const ORDER_TIME = 6.5
+const LEAVE_DELAY = 4.2
 const MEAL_OPTIONS = ["burger", "salad", "pizza"]
+const ORDER_FONT = preload("res://fonts/PixelOperator8.ttf")
 
 var spawn_point: Node = null
 var order_name: String = ""
 var current_state: String = "waiting"
 
 @onready var timer: Timer = $Despawn_Timer
+@onready var customer_sprite: AnimatedSprite2D = $customer_icon
 var order_label: Label
 
 func _ready() -> void:
 	add_to_group("customers")
+	randomize()
+	_apply_random_customer_appearance()
 	timer.one_shot = true
 	timer.timeout.connect(_on_timer_timeout)
 	timer.wait_time = ORDER_TIME
@@ -28,21 +32,39 @@ func _ready() -> void:
 	order_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	order_label.position = Vector2(-40, -70)
 	order_label.size = Vector2(80, 24)
+	order_label.add_theme_font_override("font", ORDER_FONT)
 	order_label.add_theme_font_size_override("font_size", 16)
 	order_label.modulate = Color(1, 0.95, 0.3, 1)
 	add_child(order_label)
 	update_order_label()
+
+func _apply_random_customer_appearance() -> void:
+	if customer_sprite == null:
+		return
+
+	var frames = customer_sprite.sprite_frames
+	if frames == null:
+		return
+
+	var anims = frames.get_animation_names()
+	if anims.size() == 0:
+		return
+
+	var idx: int = int(randi() % anims.size())
+	var chosen_anim: StringName = StringName(anims[idx])
+	customer_sprite.animation = chosen_anim
+	customer_sprite.play()
 
 func update_order_label() -> void:
 	if order_label == null:
 		return
 	match current_state:
 		"waiting":
-			order_label.text = "?"
+			order_label.text = "❓"
 		"order_ready":
 			order_label.text = order_name.to_upper()
 		"served":
-			order_label.text = "✓"
+			order_label.text = "✅"
 		_:
 			order_label.text = ""
 
@@ -63,6 +85,16 @@ func _on_timer_timeout() -> void:
 			queue_free()
 
 func receive_meal(meal_name: String) -> bool:
+	if current_state == "waiting":
+		current_state = "served"
+		update_order_label()
+		var paid := randf() < 0.33
+		if paid:
+			emit_signal("customer_served", self)
+		timer.wait_time = 0.6
+		timer.start()
+		return true
+
 	if current_state != "order_ready":
 		return false
 
