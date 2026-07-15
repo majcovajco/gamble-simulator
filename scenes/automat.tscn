@@ -18,6 +18,7 @@ position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_pulwq")
 
 [node name="E" type="Label" parent="AutomarArea2D/Automat_tvar" unique_id=308098997]
+z_index = 1
 offset_left = -8.0
 offset_top = -36.0
 offset_right = 15.0
